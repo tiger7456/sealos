@@ -108,7 +108,9 @@ func TemplateFromTemplateContent(templateContent string) []byte {
 	envMap["Version"] = Version
 	envMap["ApiServer"] = ApiServer
 	envMap["PodCIDR"] = PodCIDR
+	envMap["PodIPV6CIDR"] = PodIPV6CIDR
 	envMap["SvcCIDR"] = SvcCIDR
+	envMap["SvcIPV6CIDR"] = SvcIPV6CIDR
 	envMap["Repo"] = Repo
 	envMap["Master0"] = IpFormat(MasterIPs[0])
 	envMap["Network"] = Network

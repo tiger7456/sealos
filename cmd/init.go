@@ -26,22 +26,17 @@ import (
 )
 
 var contact = `
-      ___           ___           ___           ___       ___           ___     
-     /\  \         /\  \         /\  \         /\__\     /\  \         /\  \    
-    /::\  \       /::\  \       /::\  \       /:/  /    /::\  \       /::\  \   
-   /:/\ \  \     /:/\:\  \     /:/\:\  \     /:/  /    /:/\:\  \     /:/\ \  \  
-  _\:\~\ \  \   /::\~\:\  \   /::\~\:\  \   /:/  /    /:/  \:\  \   _\:\~\ \  \ 
- /\ \:\ \ \__\ /:/\:\ \:\__\ /:/\:\ \:\__\ /:/__/    /:/__/ \:\__\ /\ \:\ \ \__\
- \:\ \:\ \/__/ \:\~\:\ \/__/ \/__\:\/:/  / \:\  \    \:\  \ /:/  / \:\ \:\ \/__/
-  \:\ \:\__\    \:\ \:\__\        \::/  /   \:\  \    \:\  /:/  /   \:\ \:\__\  
-   \:\/:/  /     \:\ \/__/        /:/  /     \:\  \    \:\/:/  /     \:\/:/  /  
-    \::/  /       \:\__\         /:/  /       \:\__\    \::/  /       \::/  /   
-     \/__/         \/__/         \/__/         \/__/     \/__/         \/__/  
 
-                  官方文档：sealyun.com
-                  项目地址：github.com/fanux/sealos
-                  QQ群   ：98488045
-                  常见问题：sealyun.com/faq
+  _  __     _                          _            
+ | |/ /    | |                        | |           
+ | ' /_   _| |__   ___ _ __ _ __   ___| |_ ___  ___ 
+ |  <| | | | '_ \ / _ \ '__| '_ \ / _ \ __/ _ \/ __|
+ | . \ |_| | |_) |  __/ |  | | | |  __/ ||  __/\__ \
+ |_|\_\__,_|_.__/ \___|_|  |_| |_|\___|\__\___||___/
+                                                    
+
+                  项目地址：https://github.com/tiger7456/sealos
+
 `
 
 var exampleInit = `
@@ -126,7 +121,9 @@ func init() {
 	initCmd.Flags().StringVar(&install.Version, "version", "", "version is kubernetes version")
 	initCmd.Flags().StringVar(&install.Repo, "repo", "k8s.gcr.io", "choose a container registry to pull control plane images from")
 	initCmd.Flags().StringVar(&install.PodCIDR, "podcidr", "100.64.0.0/10", "Specify range of IP addresses for the pod network")
+	initCmd.Flags().StringVar(&install.PodIPV6CIDR, "podipv6cidr", "2001:1010:43::/108", "Specify range of IPV6 addresses for the pod network")
 	initCmd.Flags().StringVar(&install.SvcCIDR, "svccidr", "10.96.0.0/12", "Use alternative range of IP address for service VIPs")
+	initCmd.Flags().StringVar(&install.SvcIPV6CIDR, "svcipv6cidr", "2002:1010:43::/108", "Use alternative range of IP address for service VIPs")
 	initCmd.Flags().StringVar(&install.Interface, "interface", "eth.*|en.*|em.*", "name of network interface, when use calico IP_AUTODETECTION_METHOD, set your ipv4 with can-reach=192.168.0.1")
 
 	initCmd.Flags().BoolVar(&install.WithoutCNI, "without-cni", false, "If true we not install cni plugin")

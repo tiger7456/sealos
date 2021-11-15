@@ -14,6 +14,9 @@ func (c Calico) Manifests(template string) string {
 	if c.metadata.CIDR == "" {
 		c.metadata.CIDR = defaultCIDR
 	}
+	if c.metadata.IPV6CIDR == "" {
+		c.metadata.IPV6CIDR = defaultIPV6CIDR
+	}
 
 	if c.metadata.CniRepo == "" || c.metadata.CniRepo == "k8s.gcr.io" {
 		c.metadata.CniRepo = "calico"

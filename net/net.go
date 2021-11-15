@@ -11,6 +11,7 @@ const (
 	CILIUM                = "cilium"
 	defaultInterface      = "eth.*|en.*"
 	defaultCIDR           = "100.64.0.0/10"
+	defaultIPV6CIDR           = "2001:1010:43::/108"
 	defaultK8sServiceHost = "127.0.0.1"
 	defaultK8sServicePort = "6443"
 )
@@ -18,6 +19,7 @@ const (
 type MetaData struct {
 	Interface string
 	CIDR      string
+	IPV6CIDR      string
 	// ipip mode for calico.yml
 	IPIP bool
 	// MTU size

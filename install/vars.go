@@ -37,7 +37,9 @@ var (
 	Version string
 	Repo    string
 	PodCIDR string
+	PodIPV6CIDR string
 	SvcCIDR string
+	SvcIPV6CIDR string
 
 	Envs          []string // read env from -e
 	PackageConfig string   // install/delete package config

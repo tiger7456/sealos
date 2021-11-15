@@ -225,6 +225,7 @@ func (s *SealosInstaller) InstallMaster0() {
 	netyaml := net.NewNetwork(Network, net.MetaData{
 		Interface:      Interface,
 		CIDR:           PodCIDR,
+		IPV6CIDR:       PodIPV6CIDR,
 		IPIP:           !BGP,
 		MTU:            MTU,
 		CniRepo:        Repo,

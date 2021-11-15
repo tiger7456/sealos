@@ -42,10 +42,12 @@ kind: ClusterConfiguration
 kubernetesVersion: {{.Version}}
 controlPlaneEndpoint: "{{.ApiServer}}:6443"
 imageRepository: {{.Repo}}
+featureGates:
+  IPv6DualStack: true
 networking:
   # dnsDomain: cluster.local
-  podSubnet: {{.PodCIDR}}
-  serviceSubnet: {{.SvcCIDR}}
+  podSubnet: {{.PodCIDR}},{{.PodIPV6CIDR}}
+  serviceSubnet: {{.SvcCIDR}},{{.SvcIPV6CIDR}}
 apiServer:
   certSANs:
   - 127.0.0.1
@@ -58,7 +60,7 @@ apiServer:
   {{end -}}
   - {{.VIP}}
   extraArgs:
-    feature-gates: TTLAfterFinished=true
+    feature-gates: TTLAfterFinished=true,IPv6DualStack=true
   extraVolumes:
   - name: localtime
     hostPath: /etc/localtime
@@ -67,7 +69,7 @@ apiServer:
     pathType: File
 controllerManager:
   extraArgs:
-    feature-gates: TTLAfterFinished=true
+    feature-gates: TTLAfterFinished=true,IPv6DualStack=true
     experimental-cluster-signing-duration: 876000h
 {{- if eq .Network "cilium" }}
     allocate-node-cidrs: \"true\"
@@ -80,7 +82,7 @@ controllerManager:
     pathType: File
 scheduler:
   extraArgs:
-    feature-gates: TTLAfterFinished=true
+    feature-gates: TTLAfterFinished=true,IPv6DualStack=true
   extraVolumes:
   - hostPath: /etc/localtime
     mountPath: /etc/localtime
@@ -91,6 +93,9 @@ scheduler:
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
 kind: KubeProxyConfiguration
 mode: "ipvs"
+featureGates: 
+  IPv6DualStack: true
+clusterCIDR: {{.PodCIDR}},{{.PodIPV6CIDR}}
 ipvs:
   excludeCIDRs:
   - "{{.VIP}}/32"
@@ -135,10 +140,12 @@ kind: ClusterConfiguration
 kubernetesVersion: {{.Version}}
 controlPlaneEndpoint: "{{.ApiServer}}:6443"
 imageRepository: {{.Repo}}
+featureGates:
+  IPv6DualStack: true
 networking:
   # dnsDomain: cluster.local
-  podSubnet: {{.PodCIDR}}
-  serviceSubnet: {{.SvcCIDR}}
+  podSubnet: {{.PodCIDR}},{{.PodIPV6CIDR}}
+  serviceSubnet: {{.SvcCIDR}},{{.SvcIPV6CIDR}}
 apiServer:
   certSANs:
   - 127.0.0.1
@@ -151,7 +158,7 @@ apiServer:
   {{end -}}
   - {{.VIP}}
   extraArgs:
-    feature-gates: TTLAfterFinished=true
+    feature-gates: TTLAfterFinished=true,IPv6DualStack=true
   extraVolumes:
   - name: localtime
     hostPath: /etc/localtime
@@ -160,7 +167,7 @@ apiServer:
     pathType: File
 controllerManager:
   extraArgs:
-    feature-gates: TTLAfterFinished=true
+    feature-gates: TTLAfterFinished=true,IPv6DualStack=true
     experimental-cluster-signing-duration: 876000h
 {{- if eq .Network "cilium" }}
     allocate-node-cidrs: \"true\"
@@ -173,7 +180,7 @@ controllerManager:
     pathType: File
 scheduler:
   extraArgs:
-    feature-gates: TTLAfterFinished=true
+    feature-gates: TTLAfterFinished=true,IPv6DualStack=true
   extraVolumes:
   - hostPath: /etc/localtime
     mountPath: /etc/localtime
@@ -184,6 +191,9 @@ scheduler:
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
 kind: KubeProxyConfiguration
 mode: "ipvs"
+featureGates: 
+  IPv6DualStack: true
+clusterCIDR: {{.PodCIDR}},{{.PodIPV6CIDR}}
 ipvs:
   excludeCIDRs:
   - "{{.VIP}}/32"
@@ -215,6 +225,8 @@ authorization:
   webhook:
     cacheAuthorizedTTL: 5m0s
     cacheUnauthorizedTTL: 30s
+featureGates:
+  IPv6DualStack: true   
 cgroupDriver: {{ .CgroupDriver}}
 cgroupsPerQOS: true
 clusterDomain: cluster.local

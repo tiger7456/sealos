@@ -35,7 +35,9 @@ type SealConfig struct {
 	Version         string
 	Repo            string
 	PodCIDR         string
+	PodIPV6CIDR         string
 	SvcCIDR         string
+	SvcIPV6CIDR         string
 	//certs location
 	CertPath     string
 	CertEtcdPath string
@@ -67,6 +69,8 @@ func (c *SealConfig) Dump(path string) {
 	c.Repo = Repo
 	c.SvcCIDR = SvcCIDR
 	c.PodCIDR = PodCIDR
+	c.SvcIPV6CIDR = SvcIPV6CIDR
+	c.PodIPV6CIDR = PodIPV6CIDR
 
 	c.DnsDomain = DnsDomain
 	c.ApiServerCertSANs = ApiServerCertSANs
@@ -192,7 +196,9 @@ func (c *SealConfig) ShowDefaultConfig() {
 	c.Version = "v1.17.13"
 	c.Repo = "k8s.gcr.io"
 	c.PodCIDR = "100.64.0.0/10"
+	c.PodIPV6CIDR = "2001:1010:43::/108"
 	c.SvcCIDR = "10.96.0.0/12"
+	c.SvcIPV6CIDR = "2002:1010:43::/108"
 	c.ApiServerCertSANs = []string{"apiserver.cluster.local", "127.0.0.1"}
 	c.CertPath = home + "/.sealos/pki"
 	c.CertEtcdPath = home + "/.sealos/pki/etcd"
